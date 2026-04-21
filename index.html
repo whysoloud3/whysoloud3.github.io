@@ -6,16 +6,37 @@
     <style>
         body {
             background-color: black;
-            color: #00ff00; /* Классический зеленый цвет терминала */
+            color: #00ff00;
             font-family: 'Courier New', Courier, monospace;
             padding: 20px;
             line-height: 1.5;
+            overflow: hidden;
         }
         .header {
-            color: #ff0000; /* Красная строка как на том сайте */
+            color: #ff0000;
             border-bottom: 1px solid #ff0000;
             padding-bottom: 5px;
             margin-bottom: 20px;
+        }
+        #output {
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+        .input-line {
+            display: flex;
+        }
+        .prompt {
+            color: #00ff00;
+            margin-right: 10px;
+        }
+        #command-input {
+            background: transparent;
+            border: none;
+            color: #00ff00;
+            font-family: inherit;
+            font-size: inherit;
+            outline: none;
+            width: 100%;
         }
         .cursor {
             display: inline-block;
@@ -24,21 +45,57 @@
             background-color: #00ff00;
             animation: blink 1s infinite;
         }
-        @keyframes blink {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-        }
+        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
     </style>
 </head>
 <body>
     <div class="header">user@whysoloud:~$</div>
-    <div>WOLF OS [Version 1.0.1]</div>
-    <div>System status: <span style="color: yellow;">Ready.</span></div>
-    <br>
-    <div>> Initializing personal terminal...</div>
-    <div>> Welcome, wolf.</div>
-    <br>
-    <div>Type your command here...<span class="cursor"></span></div>
+    <div id="output">WOLF OS [Version 1.0.1]
+System status: <span style="color: yellow;">Ready.</span>
+Type 'help' to see available commands.
+<br></div>
+    <div class="input-line">
+        <span class="prompt">></span>
+        <input type="text" id="command-input" autofocus>
+    </div>
+
+    <script>
+        const input = document.getElementById('command-input');
+        const output = document.getElementById('output');
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const command = input.value.toLowerCase().trim();
+                processCommand(command);
+                input.value = '';
+            }
+        });
+
+        function processCommand(cmd) {
+            output.innerHTML += `<div><span style="color: #888;">> ${cmd}</span></div>`;
+            
+            let response = "";
+            if (cmd === 'help') {
+                response = "Available commands: help, about, status, clear";
+            } else if (cmd === 'about') {
+                response = "WOLF OS: Created by WhySoLoud. Personal terminal for a wolf.";
+            } else if (cmd === 'status') {
+                response = "All systems operational. Hunger levels: Minimal. Coffee: Required.";
+            } else if (cmd === 'clear') {
+                output.innerHTML = "";
+                return;
+            } else if (cmd === '') {
+                response = "";
+            } else {
+                response = `Command not found: ${cmd}. Type 'help' for assistance.`;
+            }
+
+            output.innerHTML += `<div>${response}</div><br>`;
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        // Чтобы фокус всегда был на поле ввода
+        document.addEventListener('click', () => input.focus());
+    </script>
 </body>
 </html>
