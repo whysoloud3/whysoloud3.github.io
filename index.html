@@ -64,10 +64,10 @@
         const input = document.getElementById('command-input');
         const output = document.getElementById('output');
         const wolfImages = [
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Canis_lupus_265b.jpg/300px-Canis_lupus_265b.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Canis_lupus_occidentalis.jpg/300px-Canis_lupus_occidentalis.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Wolf_unshorn_sq.jpg/300px-Wolf_unshorn_sq.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Front_view_of_a_gray_wolf_near_Hayden_Valley.jpg/300px-Front_view_of_a_gray_wolf_near_Hayden_Valley.jpg"
+            "https://cdn.pixabay.com/photo/2016/01/29/17/23/wolf-1168341_640.jpg",
+            "https://cdn.pixabay.com/photo/2017/12/17/17/54/wolf-3024652_640.jpg",
+            "https://cdn.pixabay.com/photo/2017/01/16/17/50/wolf-1984712_640.jpg",
+            "https://cdn.pixabay.com/photo/2018/10/24/09/58/wolf-3769938_640.jpg"
         ];
 
         input.addEventListener('keydown', function(e) {
@@ -95,7 +95,7 @@
             } else if (lowerCmd === 'wolf') {
                 const randomWolf = wolfImages[Math.floor(Math.random() * wolfImages.length)];
                 output.innerHTML += `<div><img src="${randomWolf}" class="wolf-img"></div>`;
-                response = "Wolf displayed successfully.";
+                response = "Initializing wolf.exe... Image loaded into active memory.";
             } else if (lowerCmd === '') {
             } else {
                 response = `'${cmd}' is not recognized as an internal or external command,<br>operable program or batch file.`;
