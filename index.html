@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Wolf Terminal</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00; /* Классический зеленый цвет терминала */
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px;
+            line-height: 1.5;
+        }
+        .header {
+            color: #ff0000; /* Красная строка как на том сайте */
+            border-bottom: 1px solid #ff0000;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background-color: #00ff00;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">user@whysoloud:~$</div>
+    <div>WOLF OS [Version 1.0.1]</div>
+    <div>System status: <span style="color: yellow;">Ready.</span></div>
+    <br>
+    <div>> Initializing personal terminal...</div>
+    <div>> Welcome, wolf.</div>
+    <br>
+    <div>Type your command here...<span class="cursor"></span></div>
+</body>
+</html>
