@@ -64,10 +64,9 @@
         const input = document.getElementById('command-input');
         const output = document.getElementById('output');
         const wolfImages = [
-            "https://cdn.pixabay.com/photo/2016/01/29/17/23/wolf-1168341_640.jpg",
-            "https://cdn.pixabay.com/photo/2017/12/17/17/54/wolf-3024652_640.jpg",
-            "https://cdn.pixabay.com/photo/2017/01/16/17/50/wolf-1984712_640.jpg",
-            "https://cdn.pixabay.com/photo/2018/10/24/09/58/wolf-3769938_640.jpg"
+            "https://images.pexels.com/photos/1058221/pexels-photo-1058221.jpeg?auto=compress&cs=tinysrgb&w=300",
+            "https://images.pexels.com/photos/1108117/pexels-photo-1108117.jpeg?auto=compress&cs=tinysrgb&w=300",
+            "https://images.pexels.com/photos/682375/pexels-photo-682375.jpeg?auto=compress&cs=tinysrgb&w=300",
         ];
 
         input.addEventListener('keydown', function(e) {
@@ -84,18 +83,18 @@
             const lowerCmd = cmd.toLowerCase();
 
             if (lowerCmd === 'help') {
-                response = "For more information on a specific command, type HELP command-name.<br>HELP, CLS, ECHO, WHOAMI, WOLF";
+                response = "For more information on a specific command, type HELP command-name.<br>HELP, CLS, ECHO, INFO, WOLF";
             } else if (lowerCmd === 'cls') {
                 output.innerHTML = "Microsoft Windows [Version 10.0.26200.8246]<br>(c) Microsoft Corporation. All rights reserved.<br><br>";
                 return;
-            } else if (lowerCmd === 'whoami') {
-                response = "whysoloud3\\wolf";
+            } else if (lowerCmd === 'info') {
+                response = "info";
             } else if (lowerCmd.startsWith('echo ')) {
                 response = cmd.substring(5);
             } else if (lowerCmd === 'wolf') {
                 const randomWolf = wolfImages[Math.floor(Math.random() * wolfImages.length)];
                 output.innerHTML += `<div><img src="${randomWolf}" class="wolf-img"></div>`;
-                response = "Initializing wolf.exe... Image loaded into active memory.";
+                response = "Wolf process initiated.";
             } else if (lowerCmd === '') {
             } else {
                 response = `'${cmd}' is not recognized as an internal or external command,<br>operable program or batch file.`;
