@@ -47,15 +47,28 @@
             border: 1px solid #333;
             display: block;
         }
+        .link-item {
+            margin: 2px 0;
+        }
+        .link-label {
+            color: #ff3333; /* Красный цвет для префикса [+] как на скрине */
+            margin-right: 10px;
+        }
+        a {
+            color: #cccccc;
+            text-decoration: underline;
+        }
+        a:hover {
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
     <div id="terminal">
         <div id="output">Microsoft Windows [Version 10.0.26200.8246]
 (c) Microsoft Corporation. All rights reserved.
-
-Type "help" for more information.
-<br></div>
+            
+<br>Type "links" for bio.<br><br></div>
         <div class="input-line">
             <span class="prompt">C:\Users\whysoloud3></span>
             <input type="text" id="command-input" autofocus autocomplete="off" spellcheck="false">
@@ -71,9 +84,19 @@ Type "help" for more information.
             "help": "Provides Help information for Windows commands.",
             "cls": "Clears the screen.",
             "echo": "Displays messages, or turns command-echoing on or off.",
-            "whoami": "Displays user, group and privileges information for the user who is currently logged on to the local system.",
-            "wolf": "Executes wolf.exe to display a visual representation of a wolf."
+            "whoami": "Displays user information.",
+            "wolf": "Executes wolf.exe to display a visual representation of a wolf.",
+            "bio": "Displays social links and personal information.",
+            "links": "Displays social links and personal information."
         };
+
+        const socialLinks = `
+            <div class="link-item"><span class="link-label">[+] Roblox:</span><a href="https://www.roblox.com/users/593342978/profile" target="_blank">https://www.roblox.com/users/593342978/profile</a></div>
+            <div class="link-item"><span class="link-label">[+] Discord:</span><a href="https://discordapp.com/users/1195033848854106252" target="_blank">https://discordapp.com/users/1195033848854106252</a></div>
+            <div class="link-item"><span class="link-label">[+] Steam:</span><a href="https://steamcommunity.com/id/whysoloud3/" target="_blank">https://steamcommunity.com/id/whysoloud3/</a></div>
+            <div class="link-item"><span class="link-label">[+] Spotify:</span><a href="https://open.spotify.com/user/31rdjtfd57ok2ddndnz55lhvzwra?si=f26314a72e7b4d68" target="_blank">https://open.spotify.com/user/31rdjtfd57ok2...</a></div>
+            <div class="link-item"><span class="link-label">[+] FakeCrime:</span><a href="https://fakecrime.bio/xso6er" target="_blank">https://fakecrime.bio/xso6er</a></div>
+        `;
 
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -96,13 +119,16 @@ Type "help" for more information.
                 } else if (arg) {
                     response = `This command is not supported by the help utility. Try "help".`;
                 } else {
-                    response = "For more information on a specific command, type HELP command-name.<br>HELP, CLS, ECHO, WHOAMI, WOLF";
+                    response = "For more information on a specific command, type HELP command-name.<br>BIO, CLS, ECHO, HELP, LINKS, WHOAMI, WOLF";
                 }
             } else if (mainCmd === 'cls') {
-                output.innerHTML = "Microsoft Windows [Version 10.0.26200.8246]<br>(c) Microsoft Corporation. All rights reserved.<br><br>";
+                output.innerHTML = "Microsoft Windows [Version 10.0.26200.8246]<br>(c) Microsoft Corporation. All rights reserved.<br>Type \"HELP\" for help.<br><br>";
                 return;
             } else if (mainCmd === 'whoami') {
                 response = "whysoloud3\\wolf";
+            } else if (mainCmd === 'bio' || mainCmd === 'links') {
+                output.innerHTML += `<div>${socialLinks}</div>`;
+                response = ""; 
             } else if (mainCmd === 'echo') {
                 response = cmd.substring(5) || "ECHO is on.";
             } else if (mainCmd === 'wolf') {
