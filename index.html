@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <title>whysoloud3 cmd</title>
     <style>
+        :root {
+            --main-text: #cccccc;
+            --bg-color: #0c0c0c;
+            --prompt-color: #cccccc;
+            --link-label-color: #9dadd1; /* МЕНЯЙ ЦВЕТ НАЗВАНИЙ ТУТ */
+            --link-url-color: #cccccc;   /* ЦВЕТ САМИХ ССЫЛОК */
+        }
+
         body {
-            background-color: #0c0c0c;
-            color: #cccccc;
+            background-color: var(--bg-color);
+            color: var(--main-text);
             font-family: 'Consolas', 'Lucida Console', monospace;
             padding: 10px;
             margin: 0;
@@ -24,22 +32,21 @@
         .input-line {
             display: flex;
             align-items: center;
-            gap: 0; 
         }
         .prompt {
             white-space: nowrap;
+            color: var(--prompt-color);
         }
         #command-input {
             background: transparent;
             border: none;
-            color: #cccccc;
+            color: var(--main-text);
             font-family: inherit;
             font-size: inherit;
             outline: none;
             width: 100%;
             padding: 0;
             margin: 0;
-            text-indent: 0; 
         }
         .wolf-img {
             max-width: 400px;
@@ -51,11 +58,11 @@
             margin: 2px 0;
         }
         .link-label {
-            color: #ff3333; /* Красный цвет для префикса [+] как на скрине */
+            color: var(--link-label-color);
             margin-right: 10px;
         }
         a {
-            color: #cccccc;
+            color: var(--link-url-color);
             text-decoration: underline;
         }
         a:hover {
@@ -67,7 +74,6 @@
     <div id="terminal">
         <div id="output">Microsoft Windows [Version 10.0.26200.8246]
 (c) Microsoft Corporation. All rights reserved.
-            
 <br>Type "links" for bio.<br><br></div>
         <div class="input-line">
             <span class="prompt">C:\Users\whysoloud3></span>
@@ -86,16 +92,16 @@
             "echo": "Displays messages, or turns command-echoing on or off.",
             "whoami": "Displays user information.",
             "wolf": "Executes wolf.exe to display a visual representation of a wolf.",
-            "bio": "Displays social links and personal information.",
-            "links": "Displays social links and personal information."
+            "links": "Displays social links and personal information.",
+            "bio": "Displays social links and personal information."
         };
 
         const socialLinks = `
-            <div class="link-item"><span class="link-label">[+] Roblox:</span><a href="https://www.roblox.com/users/593342978/profile" target="_blank">https://www.roblox.com/users/593342978/profile</a></div>
-            <div class="link-item"><span class="link-label">[+] Discord:</span><a href="https://discordapp.com/users/1195033848854106252" target="_blank">https://discordapp.com/users/1195033848854106252</a></div>
-            <div class="link-item"><span class="link-label">[+] Steam:</span><a href="https://steamcommunity.com/id/whysoloud3/" target="_blank">https://steamcommunity.com/id/whysoloud3/</a></div>
-            <div class="link-item"><span class="link-label">[+] Spotify:</span><a href="https://open.spotify.com/user/31rdjtfd57ok2ddndnz55lhvzwra?si=f26314a72e7b4d68" target="_blank">https://open.spotify.com/user/31rdjtfd57ok2...</a></div>
-            <div class="link-item"><span class="link-label">[+] FakeCrime:</span><a href="https://fakecrime.bio/xso6er" target="_blank">https://fakecrime.bio/xso6er</a></div>
+            <div class="link-item"><span class="link-label">[+] Roblox:</span><a href="https://www.roblox.com/users/593342978/profile" target="_blank">www.roblox.com/users/593342978/profile</a></div>
+            <div class="link-item"><span class="link-label">[+] Discord:</span><a href="https://discordapp.com/users/1195033848854106252" target="_blank">discordapp.com/users/1195033848854106252</a></div>
+            <div class="link-item"><span class="link-label">[+] Steam:</span><a href="https://steamcommunity.com/id/whysoloud3/" target="_blank">steamcommunity.com/id/whysoloud3/</a></div>
+            <div class="link-item"><span class="link-label">[+] Spotify:</span><a href="https://open.spotify.com/user/31rdjtfd57ok2ddndnz55lhvzwra?si=389a38a1dd84428b" target="_blank">open.spotify.com/user/31rdjtfd57ok2...</a></div>
+            <div class="link-item"><span class="link-label">[+] FakeCrime:</span><a href="https://fakecrime.bio/xso6er" target="_blank">fakecrime.bio/xso6er</a></div>
         `;
 
         input.addEventListener('keydown', function(e) {
@@ -122,13 +128,12 @@
                     response = "For more information on a specific command, type HELP command-name.<br>BIO, CLS, ECHO, HELP, LINKS, WHOAMI, WOLF";
                 }
             } else if (mainCmd === 'cls') {
-                output.innerHTML = "Microsoft Windows [Version 10.0.26200.8246]<br>(c) Microsoft Corporation. All rights reserved.<br>Type \"HELP\" for help.<br><br>";
+                output.innerHTML = "Microsoft Windows [Version 10.0.26200.8246]<br>(c) Microsoft Corporation. All rights reserved.<br>Type \"links\" for bio.<br><br>";
                 return;
             } else if (mainCmd === 'whoami') {
                 response = "whysoloud3\\wolf";
             } else if (mainCmd === 'bio' || mainCmd === 'links') {
                 output.innerHTML += `<div>${socialLinks}</div>`;
-                response = ""; 
             } else if (mainCmd === 'echo') {
                 response = cmd.substring(5) || "ECHO is on.";
             } else if (mainCmd === 'wolf') {
