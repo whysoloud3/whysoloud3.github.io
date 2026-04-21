@@ -2,16 +2,17 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Command Prompt</title>
+    <title>whysoloud3 cmd</title>
     <style>
         body {
-            background-color: #0c0c0c; /* Цвет консоли Win11 */
-            color: #cccccc; /* Светло-серый текст */
+            background-color: #0c0c0c;
+            color: #cccccc;
             font-family: 'Consolas', 'Lucida Console', monospace;
             padding: 10px;
             margin: 0;
             font-size: 14px;
             line-height: 1.2;
+            overflow-x: hidden;
         }
         #terminal {
             display: flex;
@@ -23,10 +24,11 @@
         .input-line {
             display: flex;
             align-items: center;
+            gap: 0; 
         }
         .prompt {
             white-space: nowrap;
-            margin-right: 5px;
+            margin-right: 0px; 
         }
         #command-input {
             background: transparent;
@@ -37,6 +39,8 @@
             outline: none;
             width: 100%;
             padding: 0;
+            margin: 0;
+            text-indent: 0; 
         }
     </style>
 </head>
@@ -47,13 +51,20 @@
 <br></div>
         <div class="input-line">
             <span class="prompt">C:\Users\whysoloud3></span>
-            <input type="text" id="command-input" autofocus autocomplete="off">
+            <input type="text" id="command-input" autofocus autocomplete="off" spellcheck="false">
         </div>
     </div>
 
     <script>
         const input = document.getElementById('command-input');
         const output = document.getElementById('output');
+        const wolfImages = [
+            "https://i.imgur.com/8x8J8hF.jpeg",
+            "https://i.imgur.com/gO4R9vA.jpeg",
+            "https://i.imgur.com/6G2gH2s.jpeg",
+            "https://i.imgur.com/mO2X1r3.jpeg",
+            "https://i.imgur.com/b9L5fU1.jpeg"
+        ];
 
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -64,14 +75,12 @@
         });
 
         function processCommand(cmd) {
-            // Вывод самой команды, как в реальной CMD
             output.innerHTML += `<div>C:\\Users\\whysoloud3>${cmd}</div>`;
-            
             let response = "";
             const lowerCmd = cmd.toLowerCase();
 
             if (lowerCmd === 'help') {
-                response = "For more information on a specific command, type HELP command-name.<br>HELP, CLS, EXIT, ECHO, WHOAMI";
+                response = "For more information on a specific command, type HELP command-name.<br>HELP, CLS, ECHO, WHOAMI, WOLF";
             } else if (lowerCmd === 'cls') {
                 output.innerHTML = "Microsoft Windows [Version 10.0.26200.8246]<br>(c) Microsoft Corporation. All rights reserved.<br><br>";
                 return;
@@ -79,8 +88,11 @@
                 response = "whysoloud3\\wolf";
             } else if (lowerCmd.startsWith('echo ')) {
                 response = cmd.substring(5);
+            } else if (lowerCmd === 'wolf') {
+                const randomWolf = wolfImages[Math.floor(Math.random() * wolfImages.length)];
+                window.open(randomWolf, '_blank');
+                response = "Initializing wolf.exe... Image opened in a new tab.";
             } else if (lowerCmd === '') {
-                // Если просто нажали Enter
             } else {
                 response = `'${cmd}' is not recognized as an internal or external command,<br>operable program or batch file.`;
             }
@@ -90,11 +102,8 @@
             } else {
                 output.innerHTML += `<br>`;
             }
-            
             window.scrollTo(0, document.body.scrollHeight);
         }
-
-        // Автофокус при клике
         document.addEventListener('click', () => input.focus());
     </script>
 </body>
