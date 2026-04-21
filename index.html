@@ -2,61 +2,53 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Wolf Terminal</title>
+    <title>Command Prompt</title>
     <style>
         body {
-            background-color: black;
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            padding: 20px;
-            line-height: 1.5;
-            overflow: hidden;
+            background-color: #0c0c0c; /* Цвет консоли Win11 */
+            color: #cccccc; /* Светло-серый текст */
+            font-family: 'Consolas', 'Lucida Console', monospace;
+            padding: 10px;
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.2;
         }
-        .header {
-            color: #ff0000;
-            border-bottom: 1px solid #ff0000;
-            padding-bottom: 5px;
-            margin-bottom: 20px;
+        #terminal {
+            display: flex;
+            flex-direction: column;
         }
         #output {
-            margin-bottom: 10px;
             white-space: pre-wrap;
         }
         .input-line {
             display: flex;
+            align-items: center;
         }
         .prompt {
-            color: #00ff00;
-            margin-right: 10px;
+            white-space: nowrap;
+            margin-right: 5px;
         }
         #command-input {
             background: transparent;
             border: none;
-            color: #00ff00;
+            color: #cccccc;
             font-family: inherit;
             font-size: inherit;
             outline: none;
             width: 100%;
+            padding: 0;
         }
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 18px;
-            background-color: #00ff00;
-            animation: blink 1s infinite;
-        }
-        @keyframes blink { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
     </style>
 </head>
 <body>
-    <div class="header">user@whysoloud:~$</div>
-    <div id="output">WOLF OS [Version 1.0.1]
-System status: <span style="color: yellow;">Ready.</span>
-Type 'help' to see available commands.
+    <div id="terminal">
+        <div id="output">Microsoft Windows [Version 10.0.26200.8246]
+(c) Microsoft Corporation. All rights reserved.
 <br></div>
-    <div class="input-line">
-        <span class="prompt">></span>
-        <input type="text" id="command-input" autofocus>
+        <div class="input-line">
+            <span class="prompt">C:\Users\whysoloud3></span>
+            <input type="text" id="command-input" autofocus autocomplete="off">
+        </div>
     </div>
 
     <script>
@@ -65,36 +57,44 @@ Type 'help' to see available commands.
 
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                const command = input.value.toLowerCase().trim();
+                const command = input.value.trim();
                 processCommand(command);
                 input.value = '';
             }
         });
 
         function processCommand(cmd) {
-            output.innerHTML += `<div><span style="color: #888;">> ${cmd}</span></div>`;
+            // Вывод самой команды, как в реальной CMD
+            output.innerHTML += `<div>C:\\Users\\whysoloud3>${cmd}</div>`;
             
             let response = "";
-            if (cmd === 'help') {
-                response = "Available commands: help, about, status, clear";
-            } else if (cmd === 'about') {
-                response = "WOLF OS: Created by WhySoLoud. Personal terminal for a wolf.";
-            } else if (cmd === 'status') {
-                response = "All systems operational. Hunger levels: Minimal. Coffee: Required.";
-            } else if (cmd === 'clear') {
-                output.innerHTML = "";
+            const lowerCmd = cmd.toLowerCase();
+
+            if (lowerCmd === 'help') {
+                response = "For more information on a specific command, type HELP command-name.<br>HELP, CLS, EXIT, ECHO, WHOAMI";
+            } else if (lowerCmd === 'cls') {
+                output.innerHTML = "Microsoft Windows [Version 10.0.26200.8246]<br>(c) Microsoft Corporation. All rights reserved.<br><br>";
                 return;
-            } else if (cmd === '') {
-                response = "";
+            } else if (lowerCmd === 'whoami') {
+                response = "whysoloud3\\wolf";
+            } else if (lowerCmd.startsWith('echo ')) {
+                response = cmd.substring(5);
+            } else if (lowerCmd === '') {
+                // Если просто нажали Enter
             } else {
-                response = `Command not found: ${cmd}. Type 'help' for assistance.`;
+                response = `'${cmd}' is not recognized as an internal or external command,<br>operable program or batch file.`;
             }
 
-            output.innerHTML += `<div>${response}</div><br>`;
+            if (response) {
+                output.innerHTML += `<div>${response}</div><br>`;
+            } else {
+                output.innerHTML += `<br>`;
+            }
+            
             window.scrollTo(0, document.body.scrollHeight);
         }
 
-        // Чтобы фокус всегда был на поле ввода
+        // Автофокус при клике
         document.addEventListener('click', () => input.focus());
     </script>
 </body>
