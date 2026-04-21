@@ -42,7 +42,7 @@
             text-indent: 0; 
         }
         .wolf-img {
-            max-width: 300px;
+            max-width: 400px;
             margin: 10px 0;
             border: 1px solid #333;
             display: block;
@@ -65,9 +65,15 @@ Type 'help' to help.
     <script>
         const input = document.getElementById('command-input');
         const output = document.getElementById('output');
-        const wolfImages = [
-            "https://images.pexels.com/photos/682375/pexels-photo-682375.jpeg?auto=compress&cs=tinysrgb&w=300",
-        ];
+        const wolfImage = "https://images.pexels.com/photos/682375/pexels-photo-682375.jpeg?auto=compress&cs=tinysrgb&w=300";
+
+        const helpData = {
+            "help": "Provides Help information for Windows commands.",
+            "cls": "Clears the screen.",
+            "echo": "Displays messages, or turns command-echoing on or off.",
+            "whoami": "Displays user, group and privileges information for the user who is currently logged on to the local system.",
+            "wolf": "Executes wolf.exe to display a visual representation of a wolf."
+        };
 
         input.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
@@ -80,24 +86,31 @@ Type 'help' to help.
         function processCommand(cmd) {
             output.innerHTML += `<div>C:\\Users\\whysoloud3>${cmd}</div>`;
             let response = "";
-            const lowerCmd = cmd.toLowerCase();
+            const parts = cmd.toLowerCase().split(' ');
+            const mainCmd = parts[0];
+            const arg = parts[1];
 
-            if (lowerCmd === 'help') {
-                response = "For more information on a specific command, type HELP command-name.<br>HELP, CLS, ECHO, INFO, WOLF";
-            } else if (lowerCmd === 'cls') {
+            if (mainCmd === 'help') {
+                if (arg && helpData[arg]) {
+                    response = helpData[arg];
+                } else if (arg) {
+                    response = `This command is not supported by the help utility. Try "help".`;
+                } else {
+                    response = "For more information on a specific command, type HELP command-name.<br>HELP, CLS, ECHO, WHOAMI, WOLF";
+                }
+            } else if (mainCmd === 'cls') {
                 output.innerHTML = "Microsoft Windows [Version 10.0.26200.8246]<br>(c) Microsoft Corporation. All rights reserved.<br><br>";
                 return;
-            } else if (lowerCmd === 'info') {
-                response = "info";
-            } else if (lowerCmd.startsWith('echo ')) {
-                response = cmd.substring(5);
-            } else if (lowerCmd === 'wolf') {
-                const randomWolf = wolfImages[Math.floor(Math.random() * wolfImages.length)];
-                output.innerHTML += `<div><img src="${randomWolf}" class="wolf-img"></div>`;
-                response = "Wolf process initiated.";
-            } else if (lowerCmd === '') {
+            } else if (mainCmd === 'whoami') {
+                response = "whysoloud3\\wolf";
+            } else if (mainCmd === 'echo') {
+                response = cmd.substring(5) || "ECHO is on.";
+            } else if (mainCmd === 'wolf') {
+                output.innerHTML += `<div><img src="${wolfImage}" class="wolf-img"></div>`;
+                response = "Wolf process completed.";
+            } else if (mainCmd === '') {
             } else {
-                response = `'${cmd}' is not recognized as an internal or external command,<br>operable program or batch file.`;
+                response = `'${mainCmd}' is not recognized as an internal or external command,<br>operable program or batch file.`;
             }
 
             if (response) {
