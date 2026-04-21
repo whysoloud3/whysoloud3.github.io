@@ -8,8 +8,8 @@
             --main-text: #cccccc;
             --bg-color: #0c0c0c;
             --prompt-color: #cccccc;
-            --link-label-color: #9dadd1; /* МЕНЯЙ ЦВЕТ НАЗВАНИЙ ТУТ */
-            --link-url-color: #cccccc;   /* ЦВЕТ САМИХ ССЫЛОК */
+            --link-label-color: #9dadd1; 
+            --link-url-color: #cccccc;   
         }
 
         body {
@@ -74,13 +74,10 @@
     <div id="terminal">
         <div id="output">Microsoft Windows [Version 10.0.26200.8246]
 (c) Microsoft Corporation. All rights reserved.
-            
 <br>Type "links" for bio.
-Type "help" for more information.</div>
-                    
+Type "help" for more information.<br></div>
         <div class="input-line">
             <span class="prompt">C:\Users\whysoloud3></span>
-                                
             <input type="text" id="command-input" autofocus autocomplete="off" spellcheck="false">
         </div>
     </div>
@@ -89,6 +86,8 @@ Type "help" for more information.</div>
         const input = document.getElementById('command-input');
         const output = document.getElementById('output');
         const wolfImage = "https://images.pexels.com/photos/682375/pexels-photo-682375.jpeg?auto=compress&cs=tinysrgb&w=300";
+
+        const welcomeMessage = "Microsoft Windows [Version 10.0.26200.8246]<br>(c) Microsoft Corporation. All rights reserved.<br><br>Type \"links\" for bio.<br>Type \"help\" for more information.<br><br>";
 
         const helpData = {
             "help": "Provides Help information for Windows commands.",
@@ -132,7 +131,7 @@ Type "help" for more information.</div>
                     response = "For more information on a specific command, type HELP command-name.<br>CLS, ECHO, HELP, LINKS, WHOAMI, WOLF";
                 }
             } else if (mainCmd === 'cls') {
-                output.innerHTML = "Microsoft Windows [Version 10.0.26200.8246]<br>(c) Microsoft Corporation. All rights reserved.<br>Type \"links\" for bio.<br><br>";
+                output.innerHTML = welcomeMessage;
                 return;
             } else if (mainCmd === 'whoami') {
                 response = "whysoloud3\\wolf";
