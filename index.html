@@ -28,7 +28,6 @@
         }
         .prompt {
             white-space: nowrap;
-            margin-right: 0px; 
         }
         #command-input {
             background: transparent;
@@ -41,6 +40,12 @@
             padding: 0;
             margin: 0;
             text-indent: 0; 
+        }
+        .wolf-img {
+            max-width: 300px;
+            margin: 10px 0;
+            border: 1px solid #333;
+            display: block;
         }
     </style>
 </head>
@@ -59,11 +64,10 @@
         const input = document.getElementById('command-input');
         const output = document.getElementById('output');
         const wolfImages = [
-            "https://i.imgur.com/8x8J8hF.jpeg",
-            "https://i.imgur.com/gO4R9vA.jpeg",
-            "https://i.imgur.com/6G2gH2s.jpeg",
-            "https://i.imgur.com/mO2X1r3.jpeg",
-            "https://i.imgur.com/b9L5fU1.jpeg"
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Canis_lupus_265b.jpg/300px-Canis_lupus_265b.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Canis_lupus_occidentalis.jpg/300px-Canis_lupus_occidentalis.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Wolf_unshorn_sq.jpg/300px-Wolf_unshorn_sq.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Front_view_of_a_gray_wolf_near_Hayden_Valley.jpg/300px-Front_view_of_a_gray_wolf_near_Hayden_Valley.jpg"
         ];
 
         input.addEventListener('keydown', function(e) {
@@ -90,8 +94,8 @@
                 response = cmd.substring(5);
             } else if (lowerCmd === 'wolf') {
                 const randomWolf = wolfImages[Math.floor(Math.random() * wolfImages.length)];
-                window.open(randomWolf, '_blank');
-                response = "Initializing wolf.exe... Image opened in a new tab.";
+                output.innerHTML += `<div><img src="${randomWolf}" class="wolf-img"></div>`;
+                response = "Wolf displayed successfully.";
             } else if (lowerCmd === '') {
             } else {
                 response = `'${cmd}' is not recognized as an internal or external command,<br>operable program or batch file.`;
