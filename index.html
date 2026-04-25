@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>whysoloud3 cmd</title>
+    <title>cmd.exe</title>
     <style>
         :root {
             --main-text: #cccccc;
@@ -15,7 +15,6 @@
             --link-url-color: #cccccc;   
         }
 
-        /* Центрируем окно на странице */
         body {
             background-color: #1a1a1a; /* Темный фон за пределами окна */
             display: flex;
@@ -27,7 +26,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* Оболочка окна Windows 11 */
         .window-frame {
             width: 850px;
             height: 500px;
@@ -40,7 +38,6 @@
             border: 1px solid #333;
         }
 
-        /* Шапка окна (Title Bar) */
         .title-bar {
             background-color: var(--title-bg);
             padding: 8px 12px;
@@ -74,7 +71,6 @@
         
         .control-btn:hover { opacity: 1; }
 
-        /* Область самого терминала */
         #terminal {
             padding: 10px;
             flex-grow: 1;
@@ -85,7 +81,6 @@
             color: var(--main-text);
         }
 
-        /* Стилизация скроллбара под Win11 */
         #terminal::-webkit-scrollbar { width: 8px; }
         #terminal::-webkit-scrollbar-track { background: transparent; }
         #terminal::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
@@ -146,8 +141,8 @@
         <div id="terminal">
             <div id="output">Microsoft Windows [Version 10.0.26200.8246]
 (c) Microsoft Corporation. All rights reserved.
-<br>Type "links" for bio.
-Type "help" for more information.<br><br></div>
+<br>Type "LINKS" for bio.
+Type "HELP" for more information.<br><br></div>
             <div class="input-line">
                 <span class="prompt">C:\Users\whysoloud3></span>
                 <input type="text" id="command-input" autofocus autocomplete="off" spellcheck="false">
