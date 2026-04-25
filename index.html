@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>cmd.exe</title>
     <style>
         :root {
@@ -16,7 +18,7 @@
         }
 
         body {
-            background-color: #1a1a1a; /* Темный фон за пределами окна */
+            background-color: #1a1a1a;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -58,6 +60,7 @@
         .window-controls {
             display: flex;
             gap: 15px;
+            pointer-events: none; 
         }
 
         .control-btn {
@@ -65,11 +68,9 @@
             height: 12px;
             color: #fff;
             font-size: 14px;
-            cursor: pointer;
             opacity: 0.7;
+            cursor: default;
         }
-        
-        .control-btn:hover { opacity: 1; }
 
         #terminal {
             padding: 10px;
@@ -84,7 +85,6 @@
         #terminal::-webkit-scrollbar { width: 8px; }
         #terminal::-webkit-scrollbar-track { background: transparent; }
         #terminal::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-        #terminal::-webkit-scrollbar-thumb:hover { background: #444; }
 
         #output { white-space: pre-wrap; }
 
@@ -121,7 +121,6 @@
         .link-item { margin: 4px 0; }
         .link-label { color: var(--link-label-color); margin-right: 10px; }
         a { color: var(--link-url-color); text-decoration: underline; }
-        a:hover { color: #ffffff; }
     </style>
 </head>
 <body>
@@ -141,8 +140,8 @@
         <div id="terminal">
             <div id="output">Microsoft Windows [Version 10.0.26200.8246]
 (c) Microsoft Corporation. All rights reserved.
-<br>Type "LINKS" for bio.
-Type "HELP" for more information.<br><br></div>
+<br>Type "links" for bio.
+Type "help" for more information.<br><br></div>
             <div class="input-line">
                 <span class="prompt">C:\Users\whysoloud3></span>
                 <input type="text" id="command-input" autofocus autocomplete="off" spellcheck="false">
@@ -212,7 +211,6 @@ Type "HELP" for more information.<br><br></div>
                 output.innerHTML += `<div><img src="${wolfImage}" class="wolf-img"></div>`;
                 response = "Wolf process completed.";
             } else if (mainCmd === '') {
-                // Пустая команда
             } else {
                 response = `'${mainCmd}' is not recognized as an internal or external command,<br>operable program or batch file.`;
             }
@@ -223,11 +221,9 @@ Type "HELP" for more information.<br><br></div>
                 output.innerHTML += `<br>`;
             }
             
-            // Автопрокрутка вниз внутри терминала
             terminal.scrollTop = terminal.scrollHeight;
         }
 
-        // Фокус на ввод при клике в любое место окна
         document.addEventListener('click', () => input.focus());
     </script>
 </body>
