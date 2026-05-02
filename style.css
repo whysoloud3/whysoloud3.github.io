@@ -69,19 +69,20 @@ img {
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.fa-brands:hover, .fa-solid:hover {
-    transform: scale(1.15);
-    color: #00000;
-    filter: brightness(0.05);
-}
-
 .fa-discord:active {
     color: #7fb882 !important;
     transition-duration: 0.1s;
 }
 
 .fa-discord.clicked {
-    color: #7fb882 !important;
+    color: #8ac28d !important;
+    filter: none !important;
+}
+
+.fa-brands:hover, .fa-solid:hover {
+    transform: scale(1.15);
+    color: #00000;
+    filter: brightness(0.05);
 }
 
 body.dark-theme .card {
@@ -158,16 +159,6 @@ body::before {
     z-index: -1;
 }
 
-/* Анимация медленного плавания лапок */
-@keyframes pawMovement {
-    from { background-position: 0 0; }
-    to { background-position: 70px 70px; }
-}
-
-body::before {
-    animation: pawMovement 120s linear infinite;
-}
-
 body::after {
     content: "";
     position: fixed;
@@ -197,7 +188,7 @@ body.dark-theme::after {
     padding-left: 10px;
     width: 42px;
     margin: -10px;
-    transition: 0.3s;
+    transition: 0.2s;
     filter: invert(1);
     opacity: 0.7;
 }
